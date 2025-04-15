@@ -1,4 +1,8 @@
-Not enough disk space on VM:
+# General Command Reference
+
+## Debugging:
+
+- Not enough disk space on VM:
 
 ```bash
 sudo apt-get clean
