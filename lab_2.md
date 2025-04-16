@@ -4,9 +4,11 @@
 - Platform: Oracle Quick VM
 
 ## Setup
-One directory is computer and one in Desktop, which to update?
+Basically can follow the guides from this video: https://www.youtube.com/watch?v=R_kid1CHuOw
 
 ## Configuration
+
+Refers to the configuration codes from lecture slides. All the updates make at root directory of `hadoop`. Not the one at home/redi/hadoop.
 
 - Update `hdfs-site.xml`
 
@@ -98,6 +100,8 @@ One directory is computer and one in Desktop, which to update?
 
 ## Testing The Setup
 
+### Launching The Nodes
+
 - Need to figure out how to add `hdfs`s to the path, so that it can be run from any directory. Othersie use `hadoop/bin/hdfs` or `hadoop/bin/hadoop` to run the commands.
 - To start and stop the services, use the following commands:
 
@@ -122,5 +126,55 @@ We can check the status of the services through browser by visitng `http://local
 sudo jps
 ```
 
+### Adding Environment Variables
+
+To access `hadoop` and `hdfs` commands from terminal, we need to add the following environment variables to the `~/.bashrc` file:
+
+Open the `~/.bashrc` file in a text editor by typing:
+
+```bash
+nano ~/.bashrc
+```
+
+Then add the following lines at the end of the file:
+```bash
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export HADOOP_HOME=/home/redi/hadoop # redi is the username
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
+```
+
+After exiting editor, run the following command to apply the changes:
+
+```bash
+source ~/.bashrc
+```
+
 ## Mapreduce
-The code for mapreduce is not working after the change.
+The code for mapreduce is not working after the change since the file system is changed.
+
+### Working With hdfs File System
+
+```bash
+hadoop fs -mkdir /user
+hadoop fs -mkdir /user/hdfs
+
+touch home/redi/Desktop/sample.txt
+cat >> home/redi/Desktop/sample.txt
+# This is a sample text file.
+# This is a sample text file.
+# This is a sample text file. 
+cat home/redi/Desktop/sample.txt # to check the content of the file
+
+hdfs dfs -put home/redi/Desktop/sample.txt /user/hdfs/sample.txt # to put the file into hdfs
+hdfs dfs -ls /user/hdfs/sample.txt # to check the file in hdfs
+hdfs dfs -appendToFile /home/redi/Desktop/sample.txt /user/hdfs/sample.txt # to append the file in hdfs
+hdfs dfs -get /user/hdfs/sample.txt
+hdfs dfs -rm /user/hdfs/sample.txt # to remove the file from hdfs
+```
