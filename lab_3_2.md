@@ -24,7 +24,7 @@ nano ~/.bashrc
 # version 1
 export PATH=$PATH:/home/redi/sqoop/bin
 # version 2
-export SQOOP_HOME=/home/redi/hadoop # redi is the username
+export SQOOP_HOME=/home/redi/sqoop # redi is the username
 export PATH=$PATH:$SQOOP_HOME/bin
 
 source ~/.bashrc
