@@ -27,7 +27,7 @@ Then create a database and table using the mysql shell:
 CREATE DATABASE WQD7007;
 Use WQD7007;
 create table churn (customerID varchar(20), 
-PaperlessBilling varchar(3), -PaymentMethod varchar(30), -MonthlyCharges numeric(8,2), Churn varchar(3));
+PaperlessBilling varchar(3), PaymentMethod varchar(30), MonthlyCharges numeric(8,2), Churn varchar(3));
 exit
 ```
 
