@@ -4,7 +4,7 @@
 - Platform: Oracle Quick VM
 
 ## Setup
-Follow the slide, par 1 will work with MySQL. Remember username is `redi` and password is `1234`.
+Follow the slide, part 1 will work with MySQL. Remember username is `redi` and password is `1234`.
 
 ## Configuration
 
@@ -25,7 +25,8 @@ Then create a database and table using the mysql shell:
 
 ```sql
 CREATE DATABASE WQD7007;
-Use WQD7007;-create table churn (customerID varchar(20), 
+Use WQD7007;
+create table churn (customerID varchar(20), 
 PaperlessBilling varchar(3), -PaymentMethod varchar(30), -MonthlyCharges numeric(8,2), Churn varchar(3));
 exit
 ```
