@@ -50,13 +50,21 @@ Currently, the MapReduce process cannot be completed and will stuck at 0%, altho
 
 ## Bug Fixes
 
-- Typo `locahost` should be modified to `localhost` at `yarn-site.xml` as it will empty node to be called
-- `namenode` not starting or `resource-manager` not appearing in `sudo jps` is detecting to resolve we need to restart everything via:
+- Typo `locahost` should be modified to `localhost` at `yarn-site.xml` as it will result in an empty and accesible node to be called
+- `namenode` not starting or `resource-manager` not appearing in `sudo jps` is detected. To resolve we need to restart everything via:
 ```bash
 hadoop/sbin/start-all.sh
 hadoop/sbin/stop-all.sh
 ```
-- When `THIS CODE` is run a `/churn` folder will be created at hadoop and running `THIS CODE` for a second time will result in error, we can remove the created folder with:
+
+**MySQL Issue**
+```bash
+# THIS CODE
+sqoop import -connect 
+jdbc:mysql://localhost/WQD7007 -username 
+root -password 1234 -table churn -m 1
+```
+- When the code is run a `/churn` folder will be created at hadoop, and running it for a second time will result in an error where a folder exists, we can remove the created folder with:
 ```bash
 hdfs dfs -rm -r /home/redi/churn
 ```
