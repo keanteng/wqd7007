@@ -39,7 +39,7 @@ USE WQD7007;
 SHOW TABLES;
 ```
 
-Load the CSV file into the table using the following command. There is some issue to load straight from local device to the virtual machine. So we need to get a copy of the file in our directory first. Then we also need to put in the mysql-files directory as it will show `--secure-file-priv` erro message:
+Load the CSV file into the table using the following command. There is some issue to load straight from local device to the virtual machine. So we need to get a copy of the file in our directory first (Tips below👇). Then we also need to put in the mysql-files directory as it will show `--secure-file-priv` erro message:
 
 ```bash
 # Copy the CSV file to the mysql-files directory
