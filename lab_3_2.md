@@ -56,7 +56,7 @@ Currently, the MapReduce process cannot be completed and will stuck at 0%, altho
 
 ## Bug Fixes
 
-- Typo `locahost` should be modified to `localhost` at `yarn-site.xml` as it will result in an empty and accesible node to be called
+- Typo `locahost` should be modified to `localhost` at `yarn-site.xml` as it will result in an empty and inaccesible node to be called
 - `namenode` not starting or `resource-manager` not appearing in `sudo jps` is detected. To resolve we need to restart everything via:
 ```bash
 hadoop/sbin/start-all.sh
