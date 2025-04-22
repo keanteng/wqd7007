@@ -16,11 +16,17 @@ Then unzip the file. Can use the code or do in file explorer:
 tar -xzf sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz
 ```
 
-Then create `sqoop` folder at `home` directory and paster everything inside. Then update the environment variables:
+Then create `sqoop` folder at `home` directory and paster everything inside. Then update the environment variables by inserting the variables at the last line:
 
 ```bash
 nano ~/.bashrc
+
+# version 1
 export PATH=$PATH:/home/redi/sqoop/bin
+# version 2
+export SQOOP_HOME=/home/redi/hadoop # redi is the username
+export PATH=$PATH:$SQOOP_HOME/bin
+
 source ~/.bashrc
 ```
 
@@ -55,16 +61,24 @@ Currently, the MapReduce process cannot be completed and will stuck at 0%, altho
 ```bash
 hadoop/sbin/start-all.sh
 hadoop/sbin/stop-all.sh
+# check localhost to see if hadoop is running
 ```
+- When booting the VM the screen is also detected to be freeze, this is resolved by powering down the machine. Powering down the machine will not delete the machine data and it can be a useful approach in certain scenario.
 
 **MySQL Issue**
 ```bash
 # THIS CODE
 sqoop import -connect 
 jdbc:mysql://localhost/WQD7007 -username 
-root -password 1234 -table churn -m 1
+root -password 1234 -table churn -m 1 # change password
 ```
 - When the code is run a `/churn` folder will be created at hadoop, and running it for a second time will result in an error where a folder exists, we can remove the created folder with:
 ```bash
+# delete folder
 hdfs dfs -rm -r /home/redi/churn
+
+# check folder note that /home/redi is created by default
+# like we create /abc
+# then if will be put at /home/redi/abc
+hdfs dfs -ls /home/redi
 ```
