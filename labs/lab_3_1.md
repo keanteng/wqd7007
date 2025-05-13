@@ -1,4 +1,10 @@
+---
+bibliography: references.bib
+---
+
 # Lab 3 Part 1 Documentation
+
+
 
 - Date: April 22, 2025
 - Platform: Oracle Quick VM
