@@ -1,4 +1,4 @@
-# Lab 4 Documentation
+# Lab 4 Part 1 Documentation
 
 - Date: May 20, 2025
 - Platform: Oracle Quick VM
@@ -132,3 +132,11 @@ JOIN (
 ```
 
 ![Alt](../images/highest_run_id.png)
+
+Finding `R` standard deviation:
+
+```bash
+select stddev(R) from batting;
+```
+
+![Alt](../images/std_dev.png)
