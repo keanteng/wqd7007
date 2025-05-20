@@ -1,6 +1,10 @@
-# General Command Reference
+# Lab Study Notes
 
-## General
+The directory contains the study notes and code for the labs performed on VirtualBox Ubuntu 22.04. The notes strive to provide a comprehensive set-up for the labs, be it installation, configuration, or usage of the tools. 
+
+## General Command Reference on Linux
+
+### General
 
 ```bash
 cd ..
