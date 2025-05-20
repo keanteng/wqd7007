@@ -102,3 +102,65 @@ TBLPROPERTIES("skip.header.line.count"="1");
 LOAD DATA LOCAL INPATH '../../Downloads/trucks.csv' 
 INTO TABLE trucks;
 ```
+
+- Problem 1: Find out the truck, driver, truck model and their 
+effective miles per gas in Jun13.
+
+```sql
+-- Calculate effective miles per gallon for June 2013
+SELECT 
+    truckid, 
+    driverid, 
+    model, 
+    jun13_miles / jun13_gas AS jun13_mpg
+FROM trucks
+ORDER BY jun13_mpg DESC;
+```
+
+![Alt](../images/effective_miles.png)
+
+- Problem 2: Find the average miles on May 13 by truck model.
+
+```sql
+-- Calculate average miles in May 2013 grouped by truck model
+SELECT 
+    model,
+    AVG(may13_miles) AS avg_may13_miles
+FROM trucks
+GROUP BY model
+ORDER BY avg_may13_miles DESC;
+```
+
+![Alt](../images/average_miles.png)
+
+- Problem 3: Find the drives who 'overspeed' using geolocation table.
+
+```sql
+-- Find drivers who overspeed (assuming overspeed is velocity > 65)
+SELECT
+    driverid,
+    MAX(velocity) AS max_speed
+FROM geolocation
+WHERE velocity > 65  -- Assuming 65 is the speed limit
+GROUP BY driverid
+ORDER BY max_speed DESC;
+```
+
+![Alt](../images/overspeed.png)
+
+- Problem 4: Find the cities where drivers overspeed.
+
+```sql
+-- Find cities where overspeeding occurs
+SELECT 
+    city,
+    state,
+    COUNT(*) AS overspeed_incidents,
+    MAX(velocity) AS max_velocity
+FROM geolocation
+WHERE velocity > 65  -- Assuming 65 is the speed limit
+GROUP BY city, state
+ORDER BY overspeed_incidents DESC, max_velocity DESC;
+```
+
+![Alt](../images/overspeed_city.png)
