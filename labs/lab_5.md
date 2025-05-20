@@ -37,7 +37,7 @@ pig
 ## Working with Pig
 
 ```bash
-batting = load ‘/user/hdfs/batting.csv’ using PigStorage(‘,’);
+batting = load '/user/hdfs/batting.csv' using PigStorage(',');
 raw_runs = FILTER batting BY $1>0;
 
 # view the raw_runs
@@ -50,8 +50,30 @@ Runs = FOREACH raw_runs GENERATE $0 as playerID, $1 as year, $8 as runs;
 DUMP Runs;
 
 # aggregate data
-grp_data = GROUP runs by (year);
+grp_data = GROUP Runs by (year);
 max_runs = FOREACH grp_data GENERATE group as 
-grp,MAX(run.runs) as max_runs;
+grp,MAX(Runs.runs) as max_runs;
 DUMP max_runs
+
+# join data
+join_max_run = JOIN max_runs by ($0, max_runs), 
+runs by (year, runs);
+join_data = FOREACH join_max_run GENERATE $0 as 
+year, $2 as playerID, $1 as run.
+DUMP join_data
+```
+
+## 💡 Issues Encountered
+
+There is an unknown error being faced when running DUMP for two consecutive times, where the second map-reduce job will get stuck indefinitely. We need to restart the entire Hadoop cluster to resolve this issue. Furthermore, after complex transformation, the DUMP command will be get stuck, further examination using Docker will be implemented. We also notice a `maxretries` message being sent continuously during the `DUMP` process. Further investigation is needed to understand the cause of this issue.
+
+## Solution
+To resolve the above isseu we need to start the `historyserver` in Hadoop cluster.
+
+```bash
+# find the shell script to start the history server
+find / -name "mr-jobhistory-daemon.sh" 2>/dev/null
+
+# start the history server
+/usr/local/hadoop-2.9.2/sbin/mr-jobhistory-daemon.sh start historyserver
 ```
