@@ -105,6 +105,30 @@ ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ',' 
 TBLPROPERTIES("skip.header.line.count"="1");
 
-LOAD DATA LOCAL INPATH '/path/to/your/baseball.csv' 
+LOAD DATA LOCAL INPATH '../../Downloads/baseball.csv' 
 OVERWRITE INTO TABLE batting;
+
+SELECT * FROM batting LIMIT 10;
 ```
+
+After running the above code, we should see the data being outputted. Now let's try some more complex queries involving map-reduce:
+
+> If we type wrong the columns name, the map reduce will get stuck
+
+```bash
+SELECT yearID, max(R) FROM batting GROUP BY yearID LIMIT 10;
+```
+
+![Alt](../images/highest_run.png)
+
+```bash
+SELECT a.yearID, a.playerID, a.R 
+FROM batting a
+JOIN (
+    SELECT yearID, MAX(R) as max_runs 
+    FROM batting 
+    GROUP BY yearID
+) b ON (a.yearID = b.yearID AND a.R = b.max_runs)
+```
+
+![Alt](../images/highest_run_id.png)
