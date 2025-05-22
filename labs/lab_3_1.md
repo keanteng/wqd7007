@@ -1,7 +1,3 @@
----
-bibliography: references.bib
----
-
 # Lab 3 Part 1 Documentation
 
 
